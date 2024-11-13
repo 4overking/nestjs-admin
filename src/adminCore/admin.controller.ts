@@ -54,9 +54,9 @@ export class DefaultAdminController {
   async getEntityWithRelations(adminEntity: AdminEntity, primaryKey: any) {
     const metadata = adminEntity.metadata;
     const relations = metadata.relations.map(r => r.propertyName);
-    return (await this.entityManager.findOneOrFail(adminEntity.entity, primaryKey, {
-      relations,
-    })) as object;
+    return (await this.entityManager
+      .findOneOrFail(adminEntity.entity, {where: {id: primaryKey}})
+    ) as object; //TODO get the name for `id`
   }
 
   async getAdminModels(query: AdminModelsQuery): Promise<AdminModelsResult> {

@@ -42,8 +42,8 @@ let DefaultAdminController = class DefaultAdminController {
         return __awaiter(this, void 0, void 0, function* () {
             const metadata = adminEntity.metadata;
             const relations = metadata.relations.map(r => r.propertyName);
-            return (yield this.entityManager.findOneOrFail(adminEntity.entity, primaryKey, {
-                relations,
+            return (yield this.entityManager.findOneOrFail(adminEntity.entity, {
+                where: {id: primaryKey}
             }));
         });
     }
